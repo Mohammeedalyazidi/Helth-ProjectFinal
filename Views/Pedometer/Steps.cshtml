@@ -1,0 +1,46 @@
+﻿@model StepsModel
+
+<div class="container rtl">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">كم عدد الخطوات التي قمت بها اليوم؟</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DateTime, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local" } })
+                            @Html.ValidationMessageFor(model => model.DateTime, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Steps, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Steps, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Steps, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">احسب</button>
+                        </div>
+                    }
+                    <br />
+                    
+              <div class="text-center">
+  <a href="@Url.Action("Details", "Pedometer")" class="btn btn-outline-secondary" style="background-color: green; color: white;">عرض السجل المحفوظ</a>
+</div>
+
+                    @if (Model.CaloriesBurned > 0)
+                    {
+                        <h2 class="text-center mt-5">السعرات الحرارية المحترقة</h2>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <p class="card-text text-center">حرقت @Model.CaloriesBurned سعر حراري بالقيام بـ @Model.Steps خطوة في @Model.DateTime</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
